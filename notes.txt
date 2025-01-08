@@ -8,14 +8,17 @@ Fill missing data using forward-fill, backward-fill, or specific imputations.
 Create Lagged Features: DONE
 Generate features based on past values of columns to capture trends over time (e.g., 1-week lag, 2-week lag).
 
-Normalize the Data:
+Normalize the Data: DONE
 Scale all features to a common range (e.g., 0 to 1 or standardize to mean 0, variance 1) for improved model performance.
 
-Time-Series Train/Test Split:
+Time-Series Train/Test Split: DONE
 Split the dataset chronologically into training and testing sets, preserving temporal order.
 
-Model Training with XGBoost:
+Model Training with XGBoost: WIP
 Train the XGBoost classifier on the training data to predict CRASH with confidence scores.
+- removed the pct_change column from training data
+- now the model is accurate, but just not predicting the crashes at all
+- next step: use SMOTE to indicate the importance of the crash events
 
 Model Evaluation:
 Assess model performance using metrics like precision, recall, F1-score, and ROC-AUC.
