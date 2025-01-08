@@ -5,7 +5,7 @@ Define CRASH (1 if ≥10% weekly drop, otherwise 0).
 Handle Missing Values: ✅
 Fill missing data using forward-fill, backward-fill, or specific imputations.
 
-Create Lagged Features:
+Create Lagged Features: DONE
 Generate features based on past values of columns to capture trends over time (e.g., 1-week lag, 2-week lag).
 
 Normalize the Data:
