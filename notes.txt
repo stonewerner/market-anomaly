@@ -1,0 +1,56 @@
+Outline of the Plan
+Target Variable Creation: ✅
+Define CRASH (1 if ≥10% weekly drop, otherwise 0).
+
+Handle Missing Values: ✅
+Fill missing data using forward-fill, backward-fill, or specific imputations.
+
+Create Lagged Features:
+Generate features based on past values of columns to capture trends over time (e.g., 1-week lag, 2-week lag).
+
+Normalize the Data:
+Scale all features to a common range (e.g., 0 to 1 or standardize to mean 0, variance 1) for improved model performance.
+
+Time-Series Train/Test Split:
+Split the dataset chronologically into training and testing sets, preserving temporal order.
+
+Model Training with XGBoost:
+Train the XGBoost classifier on the training data to predict CRASH with confidence scores.
+
+Model Evaluation:
+Assess model performance using metrics like precision, recall, F1-score, and ROC-AUC.
+
+Feature Importance and Optimization:
+Identify key drivers of crashes and optimize the model using hyperparameter tuning.
+
+Deploy or Analyze Results:
+Use the model to analyze unseen data or deploy it for real-time predictions.
+
+
+
+
+Given these requirements and characteristics, let's think through our model choice systematically:
+
+Why not Neural Networks:
+
+With weekly data from 1999-2021 and 10% crashes, we probably have ~15-20 crash events
+Neural networks typically need thousands of examples of each class
+Risk of overfitting with rare events
+
+
+Why not Logistic Regression:
+
+Market crashes often involve complex interactions between features
+Non-linear relationships (e.g., VIX spikes might matter more during high-debt periods)
+Too simple to capture the complexity
+
+
+Recommended Approach: Gradient Boosting (like XGBoost or LightGBM) because:
+
+Handles non-linear relationships
+Works well with imbalanced data
+Built-in feature importance metrics
+Can handle the temporal nature of data
+Less prone to overfitting than neural networks
+Produces probability scores naturally
+Good with medium-sized datasets
