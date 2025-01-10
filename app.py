@@ -18,22 +18,21 @@ st.title("Market Crash Prediction Dashboard")
 # Load your data
 df = pd.read_csv('FinancialMarketDataFormatted.csv')
 
-# Convert index to datetime
-df.index = pd.to_datetime(df.index)
+# Convert the Date column to datetime
+df['Date'] = pd.to_datetime(df['Date'])
 
-# Create date picker
-# Convert index to datetime if not already
-df.index = pd.to_datetime(df.index)
+# Set Date as the index
+df.set_index('Date', inplace=True)
 
-# Get list of all available dates (weeks)
+# Now create the selectbox with the proper dates
 available_dates = df.index.tolist()
+print("Available dates check:", available_dates[:5])  # Let's verify the dates look right
 
-# Create a selectbox instead of date_input
 selected_date = st.selectbox(
     "Select a week",
     options=available_dates,
     format_func=lambda x: x.strftime('%Y-%m-%d'),
-    index=0  # Start with earliest date
+    index=0
 )
 
 # Now selected_date will be directly usable as an index
