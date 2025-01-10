@@ -49,7 +49,7 @@ with col1:
     st.subheader("Key Market Indicators")
     # Adjust these based on your most important columns
     st.metric("VIX Index", f"{selected_data['VIX Index']:.2f}")
-    st.metric("VIX 3 Week Lag", f"{selected_data['VIX_Index_lag_3']:.2f}")
+    # st.metric("VIX 3 Week Lag", f"{selected_data['VIX_Index_lag_3']:.2f}")
     st.metric("CRY Index", f"{selected_data['CRY Index']:.2f}")
     st.metric("EONIA Index", f"{selected_data['EONIA Index']:.2f}")
     st.metric("JPY Currncy", f"{selected_data['JPY Curncy']:.2f}")
