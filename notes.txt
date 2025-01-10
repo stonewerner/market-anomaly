@@ -1,3 +1,7 @@
+TODO:
+ - make a new csv with the lagged feature so we can display on the frontedn
+ - debug the error with prediction_proba = xgb_model.predict_proba
+
 Outline of the Plan
 Target Variable Creation: ✅
 Define CRASH (1 if ≥10% weekly drop, otherwise 0).
