@@ -49,12 +49,10 @@ with col1:
     st.subheader("Key Market Indicators")
     # Adjust these based on your most important columns
     st.metric("VIX Index", f"{selected_data['VIX Index']:.2f}")
-    st.metric("Gold Price", f"{selected_data['XAU']:.2f}")
-    st.metric("USD Index", f"{selected_data['DXY Curncy']:.2f}")
+    st.metric("VIX 3 Week Lag", f"{selected_data['VIX Index_lag_3']:.2f}")
     st.metric("CRY Index", f"{selected_data['CRY Index']:.2f}")
     st.metric("EONIA Index", f"{selected_data['EONIA Index']:.2f}")
     st.metric("JPY Currncy", f"{selected_data['JPY Curncy']:.2f}")
-    st.metric("VIX 3 Week Lag", f"{selected_data['VIX Index_lag_3']:.2f}")
 
 # Make prediction
 prediction_proba = xgb_model.predict_proba(selected_data.values.reshape(1, -1))[0]
