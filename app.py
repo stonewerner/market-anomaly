@@ -22,12 +22,22 @@ df = pd.read_csv('FinancialMarketDataFormatted.csv')
 df.index = pd.to_datetime(df.index)
 
 # Create date picker
-selected_date = st.date_input(
-    "Select a date",
-    min_value=df.index.min(),
-    max_value=df.index.max(),
-    value=df.index.min()
+# Convert index to datetime if not already
+df.index = pd.to_datetime(df.index)
+
+# Get list of all available dates (weeks)
+available_dates = df.index.tolist()
+
+# Create a selectbox instead of date_input
+selected_date = st.selectbox(
+    "Select a week",
+    options=available_dates,
+    format_func=lambda x: x.strftime('%Y-%m-%d'),
+    index=0  # Start with earliest date
 )
+
+# Now selected_date will be directly usable as an index
+selected_data = df.loc[selected_date]
 
 # Find the closest date in our dataset
 closest_date = df.index[df.index.get_indexer([pd.Timestamp(selected_date)], method='nearest')[0]]
