@@ -105,11 +105,19 @@ with col2:
     ))
     st.plotly_chart(fig)
 
+# First, get predictions for all data
+all_predictions = xgb_model.predict_proba(df.values)[:, 1]  # Get probability of crash for all rows
+min_prob = all_predictions.min()
+max_prob = all_predictions.max()
+
+# Then in your chart code
 with col2:
     st.subheader("Relative Risk")
+    relative_risk = ((prediction_proba[1] - min_prob) / (max_prob - min_prob)) * 100
+    
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
-        value = ((prediction_proba[1] - prediction_proba.min()) / (prediction_proba.max() - prediction_proba.min())) * 100,
+        value = relative_risk,
         domain = {'x': [0, 1], 'y': [0, 1]},
         title = {'text': "Relative Risk"},
         gauge = {
