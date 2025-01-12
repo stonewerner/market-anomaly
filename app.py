@@ -4,6 +4,37 @@ import pickle
 import plotly.graph_objects as go
 from datetime import datetime
 
+def preprocess_data(df):
+    """
+    Applies all preprocessing steps used in training:
+    - Drops specified columns
+    - Creates percent change feature
+    - Creates crash indicator
+    - Adds lagged features for specified columns
+    """
+    # Drop unwanted columns
+    if 'LLL1 Index' in df.columns:
+        df.drop(columns=['LLL1 Index'], inplace=True)
+    
+    # Create percent change feature
+    df['Pct_Change'] = df['MXWO Index'].pct_change(periods=-1) * 100
+    
+    # Create crash indicator
+    df['CRASH'] = (df['Pct_Change'] <= -5).astype(int)
+    
+    # Create lagged features
+    columns_to_lag = ['VIX Index', 'MXWO Index']
+    num_lags = 3
+    
+    for col in columns_to_lag:
+        for lag in range(1, num_lags + 1):
+            df[f'{col}_lag_{lag}'] = df[col].shift(lag)
+    
+    # Drop rows with NaN values created by lagging
+    df = df.dropna()
+    
+    return df
+
 # Load the model
 def load_model(filename):
     with open(filename, "rb") as file:
@@ -23,6 +54,8 @@ df['Date'] = pd.to_datetime(df['Date'])
 
 # Set Date as the index
 df.set_index('Date', inplace=True)
+
+df = preprocess_data(df)
 
 # Now create the selectbox with the proper dates
 available_dates = df.index.tolist()
