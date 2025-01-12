@@ -109,7 +109,7 @@ with col2:
     st.subheader("Relative Risk")
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
-        value = (prediction_proba[1] - prediction_proba.min()) / (prediction_proba.max() - prediction_proba.min()) * 100,
+        value = ((prediction_proba[1] - prediction_proba.min()) / (prediction_proba.max() - prediction_proba.min())) * 100,
         domain = {'x': [0, 1], 'y': [0, 1]},
         title = {'text': "Relative Risk"},
         gauge = {
