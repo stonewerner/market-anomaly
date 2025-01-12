@@ -79,7 +79,7 @@ with col1:
     st.metric("MXRU Index", f"{selected_data['MXRU Index']:.2f}")
     st.metric("VIX Index", f"{selected_data['VIX Index']:.2f}")
     st.metric("VIX 3 Week Lag", f"{selected_data['VIX Index_lag_3']:.2f}")
-    st.metric("VGI Index", f"{selected_data['VGI Index']:.2f}")
+    st.metric("VG1 Index", f"{selected_data['VG1 Index']:.2f}")
     st.metric("EONIA Index", f"{selected_data['EONIA Index']:.2f}")
     st.metric("JPY Currncy", f"{selected_data['JPY Curncy']:.2f}")
 
