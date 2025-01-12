@@ -38,8 +38,6 @@ The Streamlit dashboard provides:
 - Confidence scores for predictions
 - Feature importance analysis
 
-```
-
 ## 💻 Tech Stack
 
 - **Machine Learning**: XGBoost, scikit-learn
@@ -58,12 +56,14 @@ The Streamlit dashboard provides:
 ## 🔧 Feature Engineering
 
 ### Lagged Features
+
 - Previous week's returns
 - Rolling averages
 - Volatility metrics
 - Volume indicators
 
 ### Technical Indicators
+
 - Moving averages
 - VIX
 - VG1
@@ -73,11 +73,13 @@ The Streamlit dashboard provides:
 ## 📊 Data Pipeline
 
 1. Data Collection
+
    - Historical market data (2000-2021)
    - Volume metrics
    - Market indicators
 
 2. Preprocessing
+
    - Feature engineering
    - SMOTE application
    - Normalization
@@ -110,7 +112,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch
 5. Open a Pull Request
 
-
 ## 📧 Contact
 
 For questions and support, please open an issue in the GitHub repository.
@@ -118,4 +119,7 @@ For questions and support, please open an issue in the GitHub repository.
 ---
 
 **Note**: Past performance does not guarantee future results. Always conduct your own research and consult with financial advisors before making investment decisions.
+
+```
+
 ```
