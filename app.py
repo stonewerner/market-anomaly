@@ -15,12 +15,7 @@ def preprocess_data(df):
     # Drop unwanted columns
     if 'LLL1 Index' in df.columns:
         df.drop(columns=['LLL1 Index'], inplace=True)
-    
-    # Create percent change feature
-    df['Pct_Change'] = df['MXWO Index'].pct_change(periods=-1) * 100
-    
-    # Create crash indicator
-    df['CRASH'] = (df['Pct_Change'] <= -5).astype(int)
+   
     
     # Create lagged features
     columns_to_lag = ['VIX Index', 'MXWO Index']
