@@ -89,11 +89,11 @@ prediction_proba = xgb_model.predict_proba(selected_data.values.reshape(1, -1))[
 with col2:
     st.subheader("Absolute Crash Probability")
     fig = go.Figure(go.Indicator(
-        mode = "gauge+number",
-        value = prediction_proba[1] * 100,
-        domain = {'x': [0, 1], 'y': [0, 1]},
-        title = {'text': ""},  # Removed title here since we use st.subheader
-        gauge = {
+        mode="gauge+number",
+        value=prediction_proba[1] * 100,
+        domain={'x': [0, 1], 'y': [0, 1]},
+        title={'text': ""},
+        gauge={
             'axis': {'range': [0, 100]},
             'bar': {'color': "red"},
             'steps': [
@@ -103,7 +103,11 @@ with col2:
             ]
         }
     ))
-    fig.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    fig.update_layout(
+        height=300,
+        margin=dict(l=20, r=20, t=40, b=20),
+        autosize=True
+    )
     st.plotly_chart(fig, use_container_width=True)
 
 # First, get predictions for all data
@@ -117,11 +121,11 @@ with col3:
     relative_risk = ((prediction_proba[1] - min_prob) / (max_prob - min_prob)) * 100
     
     fig = go.Figure(go.Indicator(
-        mode = "gauge+number",
-        value = relative_risk,
-        domain = {'x': [0, 1], 'y': [0, 1]},
-        title = {'text': ""},  # Removed title here since we use st.subheader
-        gauge = {
+        mode="gauge+number",
+        value=relative_risk,
+        domain={'x': [0, 1], 'y': [0, 1]},
+        title={'text': ""},
+        gauge={
             'axis': {'range': [0, 100]},
             'bar': {'color': "red"},
             'steps': [
@@ -131,7 +135,11 @@ with col3:
             ]
         }
     ))
-    fig.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    fig.update_layout(
+        height=300,
+        margin=dict(l=20, r=20, t=40, b=20),
+        autosize=True
+    )
     st.plotly_chart(fig, use_container_width=True)
 
 # Create a new row for the feature importance
