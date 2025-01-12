@@ -70,12 +70,12 @@ selected_data = df.loc[selected_date]
 closest_date = df.index[df.index.get_indexer([pd.Timestamp(selected_date)], method='nearest')[0]]
 selected_data = df.loc[closest_date]
 
-# Display key metrics
-col1, col2 = st.columns(2)
+# Create three columns for better layout
+col1, col2, col3 = st.columns([1, 1, 1])
 
+# Key Market Indicators in first column
 with col1:
     st.subheader("Key Market Indicators")
-    # Adjust these based on your most important columns
     st.metric("VIX Index", f"{selected_data['VIX Index']:.2f}")
     # st.metric("VIX 3 Week Lag", f"{selected_data['VIX_Index_lag_3']:.2f}")
     st.metric("CRY Index", f"{selected_data['CRY Index']:.2f}")
@@ -85,14 +85,14 @@ with col1:
 # Make prediction
 prediction_proba = xgb_model.predict_proba(selected_data.values.reshape(1, -1))[0]
 
-# Create gauge chart for crash probability
+# Absolute Crash Probability in second column
 with col2:
     st.subheader("Absolute Crash Probability")
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
         value = prediction_proba[1] * 100,
         domain = {'x': [0, 1], 'y': [0, 1]},
-        title = {'text': "Probability of Crash"},
+        title = {'text': ""},  # Removed title here since we use st.subheader
         gauge = {
             'axis': {'range': [0, 100]},
             'bar': {'color': "red"},
@@ -103,15 +103,16 @@ with col2:
             ]
         }
     ))
-    st.plotly_chart(fig)
+    fig.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    st.plotly_chart(fig, use_container_width=True)
 
 # First, get predictions for all data
 all_predictions = xgb_model.predict_proba(df.values)[:, 1]  # Get probability of crash for all rows
 min_prob = all_predictions.min()
 max_prob = all_predictions.max()
 
-# Then in your chart code
-with col2:
+# Relative Risk in third column
+with col3:
     st.subheader("Relative Risk")
     relative_risk = ((prediction_proba[1] - min_prob) / (max_prob - min_prob)) * 100
     
@@ -119,7 +120,7 @@ with col2:
         mode = "gauge+number",
         value = relative_risk,
         domain = {'x': [0, 1], 'y': [0, 1]},
-        title = {'text': "Relative Risk"},
+        title = {'text': ""},  # Removed title here since we use st.subheader
         gauge = {
             'axis': {'range': [0, 100]},
             'bar': {'color': "red"},
@@ -130,13 +131,17 @@ with col2:
             ]
         }
     ))
-    st.plotly_chart(fig)
+    fig.update_layout(height=250, margin=dict(l=10, r=10, t=30, b=10))
+    st.plotly_chart(fig, use_container_width=True)
 
-# Display feature importance
+# Create a new row for the feature importance
 st.subheader("Top 3 Contributing Factors")
 feature_importance = pd.DataFrame({
     'feature': df.columns,
     'importance': xgb_model.feature_importances_
 }).sort_values('importance', ascending=False).head(3)
 
-st.bar_chart(feature_importance.set_index('feature'))
+# Use a container to center the bar chart
+container = st.container()
+with container:
+    chart = st.bar_chart(feature_importance.set_index('feature'))

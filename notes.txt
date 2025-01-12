@@ -1,10 +1,15 @@
 TODO:
  - make a new csv with the lagged feature so we can display on the frontedn
- - debug the error with prediction_proba = xgb_model.predict_proba
+
+
+Key Dates:
+2020-03-31
+2021-01-05
+2000-03-14
 
 Outline of the Plan
 Target Variable Creation: ✅
-Define CRASH (1 if ≥10% weekly drop, otherwise 0).
+Define CRASH (1 if ≥5% weekly drop, otherwise 0).
 
 Handle Missing Values: ✅
 Fill missing data using forward-fill, backward-fill, or specific imputations.
