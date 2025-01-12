@@ -87,12 +87,31 @@ prediction_proba = xgb_model.predict_proba(selected_data.values.reshape(1, -1))[
 
 # Create gauge chart for crash probability
 with col2:
-    st.subheader("Crash Probability")
+    st.subheader("Absolute Crash Probability")
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
         value = prediction_proba[1] * 100,
         domain = {'x': [0, 1], 'y': [0, 1]},
         title = {'text': "Probability of Crash"},
+        gauge = {
+            'axis': {'range': [0, 100]},
+            'bar': {'color': "red"},
+            'steps': [
+                {'range': [0, 30], 'color': "green"},
+                {'range': [30, 70], 'color': "yellow"},
+                {'range': [70, 100], 'color': "red"}
+            ]
+        }
+    ))
+    st.plotly_chart(fig)
+
+with col2:
+    st.subheader("Relative Risk")
+    fig = go.Figure(go.Indicator(
+        mode = "gauge+number",
+        value = (prediction_proba[1] - prediction_proba.min()) / (prediction_proba.max() - prediction_proba.min()) * 100,
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        title = {'text': "Relative Risk"},
         gauge = {
             'axis': {'range': [0, 100]},
             'bar': {'color': "red"},
