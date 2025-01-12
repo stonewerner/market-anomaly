@@ -119,7 +119,3 @@ For questions and support, please open an issue in the GitHub repository.
 ---
 
 **Note**: Past performance does not guarantee future results. Always conduct your own research and consult with financial advisors before making investment decisions.
-
-```
-
-```
