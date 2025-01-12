@@ -76,9 +76,10 @@ col1, col2, col3 = st.columns([1, 1, 1])
 # Key Market Indicators in first column
 with col1:
     st.subheader("Key Market Indicators")
+    st.metric("MXRU Index", f"{selected_data['MXRU Index']:.2f}")
     st.metric("VIX Index", f"{selected_data['VIX Index']:.2f}")
     st.metric("VIX 3 Week Lag", f"{selected_data['VIX Index_lag_3']:.2f}")
-    st.metric("CRY Index", f"{selected_data['CRY Index']:.2f}")
+    st.metric("VGI Index", f"{selected_data['VGI Index']:.2f}")
     st.metric("EONIA Index", f"{selected_data['EONIA Index']:.2f}")
     st.metric("JPY Currncy", f"{selected_data['JPY Curncy']:.2f}")
 
