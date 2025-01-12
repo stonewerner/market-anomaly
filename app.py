@@ -87,7 +87,7 @@ prediction_proba = xgb_model.predict_proba(selected_data.values.reshape(1, -1))[
 
 # Absolute Crash Probability in second column
 with col2:
-    st.subheader("Absolute Crash Probability")
+    st.subheader("Crash Probability")
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=prediction_proba[1] * 100,
