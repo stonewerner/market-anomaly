@@ -4,6 +4,11 @@ import pickle
 import plotly.graph_objects as go
 from datetime import datetime
 
+# I dont have any suggestion for this code.
+# it looks well organized and well written.
+# I had no issues running the code and reading the code. 
+# Its awesome to see a different approach to predicting market crashes.
+
 def preprocess_data(df):
     """
     Applies all preprocessing steps used in training:
